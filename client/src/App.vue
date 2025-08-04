@@ -4,6 +4,7 @@ import Bottom from './components/Footer.vue';
 </script>
 <template>
   <NavBar />
+  <router-view />
   <Bottom />
 </template>
 <style></style>

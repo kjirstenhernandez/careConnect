@@ -1,7 +1,7 @@
 import express from 'express';
-import doctorRouter from './doctors';
+import { providers } from './providers';
 const router = express.Router();
 
-router.use('/doctors', doctorRouter);
+router.use('/providers', providers);
 
 export default router;

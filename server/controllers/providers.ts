@@ -12,7 +12,7 @@ export const getProviderById = async (req: Request, res: Response) => {
       where: { id: providerId },
     });
     if (providerInfo == null) {
-      return res.status(400).json({ message: 'Bad Information' });
+      return res.status(400).json({ message: "Provider doesn't exist" });
     }
     return res.status(200).json({ providerInfo });
   } catch (error) {

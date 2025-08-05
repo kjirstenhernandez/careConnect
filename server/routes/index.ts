@@ -1,8 +1,9 @@
 import express from 'express';
 import { providers } from './providers';
+import { clinics } from './clinics';
 const router = express.Router();
 
-console.log('Providers router:', providers);
 router.use('/providers', providers);
+router.use('/clinics', clinics);
 
 export default router;

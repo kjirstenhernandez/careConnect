@@ -63,7 +63,7 @@ export const addProviderLocation = async (req: Request, res: Response) => {
     const { providerId, location } = req.body;
     const provider = await findProviderById(providerId);
     if (!provider) {
-      return res.status(404).json({ message: 'Provider Not Found' }); // This is where you stopped, you were just about to add the next code that would return the response object
+      return res.status(404).json({ message: 'Provider Not Found' });
     }
     if (!checkLocationExists(provider, location)) {
       return res.status(200).json({ message: 'Location already exists' });
@@ -84,11 +84,29 @@ export const addProviderLocation = async (req: Request, res: Response) => {
       provider: updatedProvider,
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: 'Server error',
-        error: error instanceof Error ? error.message : String(error),
-      });
+    res.status(500).json({
+      message: 'Server error',
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
 };
+
+// export const deleteProviderLocation = async (req: Request, res: Response) => {
+//   try {
+//     const { providerId, location } = req.body;
+//     const provider = await findProviderById(providerId);
+//     if (!provider) {
+//       return res.status(404).json({ message: 'Provider Not Found'})
+//     }
+
+//     const updatedProvider = await prisma.providers.update({
+//       where: {
+//         id: providerId,
+//       },
+//       data: {
+//         locations: {
+
+//         }
+//       }
+//     })
+//   }

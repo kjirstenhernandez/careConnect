@@ -22,11 +22,12 @@ model Providers {
   locations   String[]
   phone       String
   fax         String
+  imageUrl    String?
 }
 
 model Clinics {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
+  name          String @unique
   streetAddress String
   city          String
   zip           String

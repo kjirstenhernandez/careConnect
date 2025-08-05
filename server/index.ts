@@ -9,12 +9,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/', router);
+app.use('/api', router);
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Catch-all to serve index.html for SPA routes
-app.get('*', (_, res) => {
+app.get(/^\/(?!api).*/, (_, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 

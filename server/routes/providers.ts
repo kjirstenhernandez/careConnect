@@ -1,6 +1,8 @@
 import express, { Router } from 'express';
-import { addProvider } from '../controllers/doctors';
+import { addProvider, getProviderById } from '../controllers/providers';
+import { validateObjectId } from '../middleware/validateObjectId';
 
 export const providers: Router = express.Router();
 
-providers.get('', addProvider);
+providers.get('/:providerId', validateObjectId, getProviderById);
+providers.post('/', addProvider);

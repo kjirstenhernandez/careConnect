@@ -19,3 +19,42 @@ export const getClinicInfoByID = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const addClinic = async (req: Request, res: Response) => {
+  try {
+    const { name, streetAddress, city, zip, phone, fax } = req.body;
+
+    // Check to see if clinic is already in system
+    const existingClinic = await prisma.clinics.findFirst({
+      where: {
+        name: {
+          equals: name,
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    if (existingClinic) {
+      return res
+        .status(400)
+        .json({ message: `A clinic named ${name} already exists.` });
+    }
+
+    const newClinic = await prisma.clinics.create({
+      data: {
+        name,
+        streetAddress,
+        city,
+        zip,
+        phone,
+        fax,
+      },
+    });
+    res.status(200).json({ message: 'New clinic Added: ', newClinic });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Unable to create clinic',
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+};

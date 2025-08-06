@@ -11,7 +11,7 @@
     <h2 class="text-2xl leading-8 text-gray-600 text-center">
       Find contact information for individual providers or entire clinics.
     </h2>
-    <div
+    <!-- <div
       class="flex flex-col sm:flex-row items-center gap-4 w-full max-w-xl mt-4"
     >
       <textInput
@@ -23,11 +23,11 @@
         textClass="w-full sm:w-[150px]"
       />
       <ButtonTemplate type="submit">Search</ButtonTemplate>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import textInput from '@/components/basic/textInput.vue';
-import ButtonTemplate from '../components/basic/buttonTemplate.vue';
+// import textInput from '@/components/basic/textInput.vue';
+// import ButtonTemplate from '../components/basic/buttonTemplate.vue';
 </script>

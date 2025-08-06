@@ -1,7 +1,7 @@
 <template>
   <!-- component -->
   <!-- This is an example component -->
-  <div class="max-w-screen mx-auto">
+  <div class="w-screen mx-auto">
     <footer
       class="p-4 bg-white shadow md:flex md:items-center md:justify-between md:p-6"
     >

@@ -1,30 +1,47 @@
 <template>
-  <header class="bg-white">
+  <header class="bg-white/90 shadow-md backdrop-blur-md">
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="md:flex md:items-center md:gap-12">
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4 md:gap-0"
+      >
+        <div
+          class="flex flex-col items-center md:flex-row md:items-center md:gap-3"
+        >
           <a
             class="no-underline block text-teal-600"
             href="#"
           >
-            <span class="sr-only">Home</span>
             <img
-              class="max-w-15"
+              class="max-w-16 md:w-12"
               src="../assets/logo.png"
+              alt="Logo"
             />
           </a>
+          <span
+            class="text-2xl font-bold text-[#335271] text-center md:text-left"
+            >CareConnect</span
+          >
         </div>
 
         <div class="hidden md:block">
           <nav aria-label="Global">
-            <ul class="flex items-center gap-6 text-md">
+            <ul class="flex items-center gap-15 text-md">
+              <li>
+                <RouterLink
+                  to="/"
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                  href="#"
+                >
+                  Home
+                </RouterLink>
+              </li>
               <li>
                 <RouterLink
                   to="/clinics"
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="#"
                 >
-                  Clinics
+                  Find a Clinic
                 </RouterLink>
               </li>
 
@@ -34,24 +51,14 @@
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="#"
                 >
-                  Providers
-                </RouterLink>
-              </li>
-
-              <li>
-                <RouterLink
-                  to="/login"
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  History
+                  Find a Provider
                 </RouterLink>
               </li>
             </ul>
           </nav>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex flex-col items-center gap-4 md:flex-row">
           <div class="sm:flex sm:gap-4">
             <a
               class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
@@ -59,15 +66,6 @@
             >
               Login
             </a>
-
-            <div class="hidden sm:flex">
-              <a
-                class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                href="#"
-              >
-                Register
-              </a>
-            </div>
           </div>
 
           <div class="block md:hidden">
@@ -97,6 +95,24 @@
   <RouterView />
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+
+const showMobileNav = ref(false);
+
+function toggleMobileNav() {
+  showMobileNav.value = !showMobileNav.value;
+}
 </script>
+<!-- 
+<script setup lang="ts">
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+
+const showMobileNav = ref(false);
+
+function toggleMobileNav() {
+  showMobileNav.value = !showMobileNav.value;
+}
+</script> -->

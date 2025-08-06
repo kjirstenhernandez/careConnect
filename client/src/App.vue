@@ -3,8 +3,10 @@ import NavBar from './components/NavBar.vue';
 import Bottom from './components/Footer.vue';
 </script>
 <template>
-  <NavBar />
-  <router-view />
-  <Bottom />
+  <div class="flex flex-col min-h-screen">
+    <NavBar />
+    <main class="flex-grow"></main>
+    <Bottom />
+  </div>
 </template>
 <style></style>

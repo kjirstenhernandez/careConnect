@@ -19,6 +19,21 @@ export const getClinicInfoByID = async (req: Request, res: Response) => {
     });
   }
 };
+export const getAllClinics = async (req: Request, res: Response) => {
+  try {
+    const clinicInfo = await prisma.clinics.findMany();
+
+    if (clinicInfo == null) {
+      res.status(400).json({ message: 'No Clinics' });
+    }
+    return res.status(200).json({ message: 'success', clinicInfo });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server error',
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+};
 
 export const addClinic = async (req: Request, res: Response) => {
   try {

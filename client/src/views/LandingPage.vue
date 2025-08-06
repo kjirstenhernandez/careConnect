@@ -28,6 +28,7 @@
         labelClassInfo="text-white"
         icon="file-medical"
         icon-color="text-gray-200"
+        :onClick="goToSpecialty"
         iconClassInfo="opacity-30"
         buttonClassInfo="bg-[#0E5387]"
       />

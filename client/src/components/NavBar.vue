@@ -19,57 +19,33 @@
           <nav aria-label="Global">
             <ul class="flex items-center gap-6 text-md">
               <li>
-                <a
+                <RouterLink
+                  to="/clinics"
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="#"
                 >
-                  About
-                </a>
+                  Clinics
+                </RouterLink>
               </li>
 
               <li>
-                <a
+                <RouterLink
+                  to="/providers"
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="#"
                 >
-                  Careers
-                </a>
+                  Providers
+                </RouterLink>
               </li>
 
               <li>
-                <a
+                <RouterLink
+                  to="/login"
                   class="text-gray-500 transition hover:text-gray-500/75"
                   href="#"
                 >
                   History
-                </a>
-              </li>
-
-              <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  Services
-                </a>
-              </li>
-
-              <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  Projects
-                </a>
-              </li>
-
-              <li>
-                <a
-                  class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  Blog
-                </a>
+                </RouterLink>
               </li>
             </ul>
           </nav>
@@ -118,4 +94,9 @@
       </div>
     </div>
   </header>
+  <RouterView />
 </template>
+
+<script>
+import { RouterLink } from 'vue-router';
+</script>

@@ -4,5 +4,6 @@ import { validateObjectId } from '../middleware/validateObjectId';
 
 export const clinics: Router = express.Router();
 
-clinics.get('/find/:clinicId', validateObjectId, getClinicInfoByID);
+clinics.get('/find/clinics/:clinicId', validateObjectId, getClinicInfoByID);
 clinics.post('/new', addClinic);
+clinics.get('/find/clinics');

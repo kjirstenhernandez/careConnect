@@ -30,16 +30,14 @@
                 <RouterLink
                   to="/"
                   class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
                 >
                   Home
                 </RouterLink>
               </li>
               <li>
                 <RouterLink
-                  to="/clinics"
+                  to="/search/clinics"
                   class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
                 >
                   Find a Clinic
                 </RouterLink>
@@ -47,9 +45,8 @@
 
               <li>
                 <RouterLink
-                  to="/providers"
+                  to="/search/providers"
                   class="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
                 >
                   Find a Provider
                 </RouterLink>

@@ -5,7 +5,7 @@ import Bottom from './components/Footer.vue';
 <template>
   <div class="flex flex-col min-h-screen">
     <NavBar />
-    <main class="flex-grow"></main>
+    <main class="flex-grow pt-8 w-full"></main>
     <Bottom />
   </div>
 </template>

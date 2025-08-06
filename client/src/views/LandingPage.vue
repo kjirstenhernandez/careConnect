@@ -37,16 +37,20 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import ActionCircle from '@/components/ActionCircle.vue';
 import Hero from '@/components/Hero.vue';
 
+
+const router = useRouter();
+
 function goToProviders() {
-  console.log('Navigate to Doctor');
+  router.push({ name: 'SearchPage', params: { type: "providers" } });
 }
 function goToSpecialty() {
-  console.log('Navigate to Specialty');
+  router.push({ name: 'SearchPage', params: { type: "specialties" } });
 }
 function goToClinics() {
-  console.log('Navigate to Clinic');
+  router.push({ name: 'SearchPage', params: { type: "clinics" } });
 }
 </script>

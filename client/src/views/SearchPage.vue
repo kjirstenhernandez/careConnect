@@ -46,7 +46,7 @@
         <textInput
           :placeholder="`Find ${type}`"
           textClass="w-full sm:w-2/3"
-          v-model="keyword"
+          v-model="queryValue"
         />
         <textInput
           placeholder="Location"
@@ -65,22 +65,112 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useFuseSearch } from '@/fuse/fuseSearch';
+import { useFuseSearch } from '@/services/fuseSearchService';
 import textInput from '@/components/basic/textInput.vue';
 import ButtonTemplate from '../components/basic/buttonTemplate.vue';
 import router from '@/router';
-import Fuse from 'fuse.js';
+import type { Provider, Clinic } from '../interfaces';
+type SearchItem = Provider | Clinic;
 
+//// Route Globals
 const route = useRoute();
 const type = ref(route.params.type as string);
 
-// Search info
-const keyword = ref(''); // user input
-const location = ref('');
-const data = ref([]);
+//// Search Globals
 
+// Endpoints map for the API call
+const endpointsMap: Record<string, string> = {
+  clinics: 'http://localhost:8080/api/clinics',
+  providers: 'http://localhost:8080/api/providers',
+  specialties: `http://localhost:8080/api/providers`,
+};
+
+// Search key map for Fuse search
+const searchKeysMap: Record<string, string[]> = {
+  clinics: ['name', 'address', 'city', 'phone', 'fax'],
+  providers: [
+    'firstName',
+    'lastName',
+    'credentials',
+    'specialties',
+    'clinic.location',
+  ],
+  specialties: ['specialties'],
+};
+const keyword = ref('');
+const queryValue = ref('');
+const location = ref('');
+const data = ref<SearchItem[]>([]); // holds the raw API data
+const { results: fuseResults } = useFuseSearch<SearchItem>(
+  data,
+  searchKeysMap[type.value] || [],
+  keyword
+);
+
+// Guards to set types.
+function isProvider(item: any): item is Provider {
+  return 'locations' in item;
+}
+
+function isClinic(item: any): item is Clinic {
+  return 'city' in item && 'name' in item;
+}
+
+const filteredResults = computed(() => {
+  if (!location.value) return fuseResults.value;
+
+  return fuseResults.value.filter(({ item }) => {
+    if (
+      (type.value === 'providers' || type.value === 'specialties') &&
+      isProvider(item)
+    ) {
+      return item.locations?.some(
+        (loc) => loc.city.toLowerCase() === location.value.toLowerCase()
+      );
+    } else if (type.value === 'clinics' && isClinic(item)) {
+      return item.city?.toLowerCase() === location.value.toLowerCase();
+    }
+
+    return false;
+  });
+});
+
+onMounted(() => {
+  loadData();
+});
+
+/*---- Search Logic ----*/
+
+// Load initial API Information from the search and return it to the data variable's value
+async function loadData() {
+  const endpoint = endpointsMap[type.value];
+
+  if (!endpoint) return;
+
+  try {
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    data.value = data;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+  }
+}
+
+// Search Button Handler
+function handleSearchClick() {
+  keyword.value = queryValue.value.trim();
+}
+
+/*---- Navigation Logic ----*/
+
+// Mini-Nav Click Handler
+function handleNavClick(type: string) {
+  router.push({ name: 'SearchPage', params: { type } });
+}
+
+// watch for route parameter changes to reload the information
 watch(
   () => route.params.type,
   (newType) => {
@@ -88,39 +178,4 @@ watch(
     loadData();
   }
 );
-
-async function loadData() {
-  const endpoint = endpointsMap[type.value];
-  if (!endpoint) return;
-
-  try {
-    const res = await fetch(endpoint);
-    data.value = await res.json();
-  } catch (error) {
-    console.error('Failed to fetch data:', error);
-  }
-}
-
-/* API call structures */
-
-//Uses Record type as an alternate to a long "if-else" chain
-const endpointsMap: Record<string, string> = {
-  clinics: 'http://localhost:8080/api/clinics',
-  providers: 'http://localhost:8080/api/providers',
-  specialties: `http://localhost:8080/api/providers`,
-};
-
-/* Click Event Functions*/
-
-// Search Button
-function handleSearchClick() {}
-
-// route.param nav links
-function handleNavClick(type: string) {
-  router.push({ name: 'SearchPage', params: { type } });
-}
-
-onMounted(() => {
-  loadData();
-});
 </script>

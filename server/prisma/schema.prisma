@@ -14,12 +14,12 @@ datasource db {
 }
 
 model Providers {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   firstName   String
   lastName    String
   credentials String[]
   specialty   String
-  locations   String[]
+  locations   Location[]
   phone       String
   fax         String
   imageUrl    String?
@@ -33,4 +33,9 @@ model Clinics {
   zip           String
   phone         String
   fax           String
+}
+
+type Location {
+  id   String @db.ObjectId
+  city String
 }

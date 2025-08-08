@@ -46,10 +46,12 @@
         <textInput
           :placeholder="`Find ${type}`"
           textClass="w-full sm:w-2/3"
+          v-model="keyword"
         />
         <textInput
           placeholder="Location"
           textClass="w-full sm:w-1/3"
+          v-model="location"
         />
         <ButtonTemplate
           type="submit"
@@ -58,18 +60,26 @@
         >
       </div>
     </div>
+    <div class="search-results"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useFuseSearch } from '@/fuse/fuseSearch';
 import textInput from '@/components/basic/textInput.vue';
 import ButtonTemplate from '../components/basic/buttonTemplate.vue';
 import router from '@/router';
+import Fuse from 'fuse.js';
 
 const route = useRoute();
 const type = ref(route.params.type as string);
+
+// Search info
+const keyword = ref(''); // user input
+const location = ref('');
+const data = ref([]);
 
 watch(
   () => route.params.type,
@@ -79,18 +89,33 @@ watch(
   }
 );
 
-function loadData() {
-  if (type.value === 'clinics') {
-    console.log('load clinics');
+async function loadData() {
+  const endpoint = endpointsMap[type.value];
+  if (!endpoint) return;
+
+  try {
+    const res = await fetch(endpoint);
+    data.value = await res.json();
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
   }
-  if (type.value === 'providers') {
-    console.log('load providers');
-  }
-}
-function handleSearchClick() {
-  console.log(`Searched ${type}`);
 }
 
+/* API call structures */
+
+//Uses Record type as an alternate to a long "if-else" chain
+const endpointsMap: Record<string, string> = {
+  clinics: 'http://localhost:8080/api/clinics',
+  providers: 'http://localhost:8080/api/providers',
+  specialties: `http://localhost:8080/api/providers`,
+};
+
+/* Click Event Functions*/
+
+// Search Button
+function handleSearchClick() {}
+
+// route.param nav links
 function handleNavClick(type: string) {
   router.push({ name: 'SearchPage', params: { type } });
 }

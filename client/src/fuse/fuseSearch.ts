@@ -8,7 +8,7 @@ export function useFuseSearch<T>(items: T[], keys: string[]) {
   const options: IFuseOptions<T> = {
     keys,
     threshold: 0.3,
-    includeScore: true, // we want the scores to be able to sort by relevance later
+    includeScore: true, // set to true so we can use the scores for relevance sorting later
   };
 
   let fuse = new Fuse(items, options);

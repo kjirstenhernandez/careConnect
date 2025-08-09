@@ -5,9 +5,9 @@
         <div class="photo-wrapper p-2">
           <img
             class="w-32 h-32 rounded-full mx-auto"
-            src="{{"
+            src="{{
             imageUrl
-            }}
+            }} "
             alt="{{ firstname lastName profile picture}}"
           />
         </div>
@@ -24,16 +24,12 @@
           <table class="text-xs my-3">
             <tbody>
               <tr>
-                <td class="px-2 py-2 text-gray-500 font-semibold">Address</td>
-                <td class="px-2 py-2">Chatakpur-3, Dhangadhi Kailali</td>
-              </tr>
-              <tr>
                 <td class="px-2 py-2 text-gray-500 font-semibold">Phone</td>
-                <td class="px-2 py-2">+977 9955221114</td>
+                <td class="px-2 py-2">{{ phone }}</td>
               </tr>
               <tr>
-                <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
-                <td class="px-2 py-2">john@exmaple.com</td>
+                <td class="px-2 py-2 text-gray-500 font-semibold">Fax</td>
+                <td class="px-2 py-2">{{ fax }}</td>
               </tr>
             </tbody>
           </table>
@@ -62,6 +58,8 @@ const props = defineProps<{
   lastName: string;
   specialty: string;
   credentials: string[];
+  phone: string;
+  fax: string;
 }>();
 
 function goToProfile() {

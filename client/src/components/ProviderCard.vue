@@ -5,9 +5,7 @@
         <div class="photo-wrapper p-2">
           <img
             class="w-32 h-32 rounded-full mx-auto"
-            src="{{
-            imageUrl
-            }} "
+            :src="imageUrl ? imageUrl : stethoscope"
             alt="{{ firstname lastName profile picture}}"
           />
         </div>
@@ -50,6 +48,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import stethoscope from '../assets/stethoscope.png';
+
 const router = useRouter();
 const props = defineProps<{
   id: string;

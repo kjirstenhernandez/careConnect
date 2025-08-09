@@ -2,8 +2,8 @@ import type { Provider, Clinic } from '@/interfaces';
 
 export const endpointsMap: Record<string, string> = {
   clinics: 'http://localhost:2000/api/clinics/find',
-  providers: 'http://localhost:2000/api/find/providers',
-  specialties: 'http://localhost:2000/api/find/providers',
+  providers: 'http://localhost:2000/api/providers/find',
+  specialties: 'http://localhost:2000/api/providers/find',
 };
 
 export async function fetchSearchData(

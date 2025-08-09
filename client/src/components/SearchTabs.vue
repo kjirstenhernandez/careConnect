@@ -6,21 +6,21 @@
       >
         <button
           class="border-b-2 font-semibold uppercase tracking-widest border-plum-bright"
-          :class="{ 'border-[#105894]': currentType === 'providers' }"
+          :class="{ 'border-white': currentType === 'providers' }"
           @click="changeType('providers')"
         >
           Providers
         </button>
         <button
           class="border-b-2 font-semibold uppercase tracking-widest border-plum-bright"
-          :class="{ 'border-[#105894]': currentType === 'clinics' }"
+          :class="{ 'border-white': currentType === 'clinics' }"
           @click="changeType('clinics')"
         >
           Clinics
         </button>
         <button
           class="border-b-2 font-semibold uppercase tracking-widest border-plum-bright"
-          :class="{ 'border-[#105894]': currentType === 'specialties' }"
+          :class="{ 'border-white': currentType === 'specialties' }"
           @click="changeType('specialties')"
         >
           Specialties
@@ -33,8 +33,10 @@
 <script setup lang="ts">
 import router from '@/router';
 import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+const props = defineProps<{ type: string }>();
 const route = useRoute();
-const currentType = (route.params.type as string) || 'providers';
+const currentType = computed(() => props.type || 'providers');
 
 function changeType(newType: string) {
   router.push({

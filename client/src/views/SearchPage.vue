@@ -1,10 +1,7 @@
 <template>
   <div class="relative py-12 flex flex-col items-center lg:py-20">
     <div class="container flex flex-col items-center">
-      <SearchTabs
-        :active="type"
-        @change="handleNavClick"
-      />
+      <SearchTabs @change="handleNavClick" />
       <SearchBar
         :type="type"
         v-model:query="queryValue"
@@ -30,8 +27,8 @@ import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';
 
-import SearchBar from '@/components/search/SearchBar.vue';
-import SearchTabs from '@/components/search/SearchTabs.vue';
+import SearchBar from '@/components/SearchBar.vue';
+import SearchTabs from '@/components/SearchTabs.vue';
 
 import { useFuseSearch } from '@/services/fuseSearchService';
 import { useFilteredResults } from '@/services/FilteredResultsService';
@@ -43,6 +40,7 @@ type SearchItem = Provider | Clinic;
 
 const route = useRoute();
 const type = ref(route.params.type as string);
+// let isInitialLoad = true;
 const keyword = ref('');
 const queryValue = ref('');
 const location = ref('');
@@ -57,19 +55,13 @@ async function loadData() {
 
 function handleSearchClick() {
   keyword.value = queryValue.value.trim();
+  loadData();
 }
 
 function handleNavClick(newType: string) {
   router.push({ name: 'SearchPage', params: { type: newType } });
+  loadData();
 }
-
-watch(
-  () => route.params.type,
-  async (newType) => {
-    type.value = newType as string;
-    await loadData();
-  }
-);
-
-onMounted(loadData);
+/* Optional: We could add a watch to have it populate as the user types, but skip the initial load 
+by adding an if (isInitialLoad){...} statement. */
 </script>

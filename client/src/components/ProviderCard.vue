@@ -1,15 +1,28 @@
 <template>
-  <div class="flex items-center h-screen w-full justify-center">
-    <div class="max-w-xs">
-      <div class="bg-white shadow-xl rounded-lg py-3">
-        <div class="photo-wrapper p-2">
+  <div>
+    <div
+      class="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
+    >
+      <div class="">
+        <div class="bg-white rounded-lg py-3 photo-wrapper p-2">
           <img
+            v-if="imageUrl && imageUrl != ''"
             class="w-32 h-32 rounded-full mx-auto"
-            :src="imageUrl ? imageUrl : stethoscope"
-            alt="{{ firstname lastName profile picture}}"
+            :src="imageUrl"
+            alt="{{ firstname lastName }} profile picture"
           />
+          <div
+            v-else
+            class="bg-white w-32 h-32 rounded-full mx-auto"
+          >
+            <img
+              class="opacity-20 w-32 h-32 rounded-full"
+              src="../assets/provider-placeholder.webp"
+              alt="generic medical provider icon"
+            />
+          </div>
         </div>
-        <div class="p-2">
+        <div class="p-2 max-w-lg mx-auto space-y-6 px-7 text-center">
           <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
             {{ firstName }} {{ lastName }}
             <span v-if="credentials.length"
@@ -25,7 +38,7 @@
                 <td class="px-2 py-2 text-gray-500 font-semibold">Phone</td>
                 <td class="px-2 py-2">{{ phone }}</td>
               </tr>
-              <tr>
+              <tr v-if="fax">
                 <td class="px-2 py-2 text-gray-500 font-semibold">Fax</td>
                 <td class="px-2 py-2">{{ fax }}</td>
               </tr>

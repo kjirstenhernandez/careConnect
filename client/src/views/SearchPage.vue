@@ -13,7 +13,14 @@
       />
     </div>
     <div class="search-results">
-      <!-- Future: render results -->
+      <h1 class="text 2xl font-bold mb-4">
+        {{ type === 'providers' ? 'Providers' : 'Clinics' }} Search Results
+      </h1>
+      <CardWrapper
+        :items="filteredResults"
+        :type="type"
+      />
+      <!-- the :type errors when specifying the providers/clinics in the prop -->
     </div>
   </div>
 </template>
@@ -30,6 +37,7 @@ import { useFuseSearch } from '@/services/fuseSearchService';
 import { useFilteredResults } from '@/services/FilteredResultsService';
 import { fetchSearchData } from '@/services/ApiSearchService';
 import type { Provider, Clinic } from '../interfaces';
+import CardWrapper from '@/components/CardWrapper.vue';
 
 type SearchItem = Provider | Clinic;
 

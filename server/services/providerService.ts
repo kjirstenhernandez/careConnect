@@ -13,8 +13,5 @@ export async function checkLocationExists(
   provider: Providers,
   locationId: string
 ) {
-  if (!provider.locations.includes(locationId)) {
-    return false;
-  }
-  return true;
+  return provider.locations.some((location) => location.id === locationId);
 }

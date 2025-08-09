@@ -20,6 +20,18 @@ export const getProviderById = async (req: Request, res: Response) => {
   }
 };
 
+export const getAllProviders = async (req: Request, res: Response) => {
+  try {
+    const providers = await prisma.providers.findMany();
+    if (providers == null) {
+      return res.status(400).json({ message: 'No Providers' });
+    }
+    return res.status(200).json({ providers });
+  } catch (error) {
+    return res.status(500).json({ message: 'Unable to get providers' });
+  }
+};
+
 // Add new provider into provider database
 export const addProvider = async (req: Request, res: Response) => {
   const { firstName, lastName, credentials, specialty, locations, phone, fax } =

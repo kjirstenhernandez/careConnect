@@ -12,7 +12,7 @@
           v-for="item in items"
           :key="item.id"
           v-bind="item"
-          :is="cardMap[type]"
+          :is="cardType"
         ></component>
       </div>
     </div>
@@ -26,12 +26,19 @@ import { ref } from 'vue';
 const error = ref<string | null>(null);
 
 const props = defineProps<{
-  type: 'providers' | 'clinics';
+  type: string; // I recognize the potential for a union error, but specifying 'providers' | 'clinics' was causing a ripple effect of other issues.  This is a bandaid solution until I can refactor code.
   items: any[];
 }>();
 
-const cardMap = {
+let cardMap = {
   providers: ProviderCard,
   clinics: ClinicCard,
 } as const;
+
+let cardType;
+if (props.type === 'provider') {
+  cardType = cardMap.providers;
+} else {
+  cardType = cardMap.clinics;
+}
 </script>

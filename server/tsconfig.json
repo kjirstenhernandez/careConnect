@@ -5,6 +5,7 @@
     "rootDir": ".",
     "outDir": "./dist",
     "moduleResolution": "node",
+    "types": ["node"],
     "typeRoots": ["./node_modules/@types"],
     "resolveJsonModule": true,
     "esModuleInterop": true,

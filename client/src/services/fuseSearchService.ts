@@ -1,41 +1,51 @@
 import { ref, watch, type Ref } from 'vue';
 import Fuse from 'fuse.js';
 import type { IFuseOptions } from 'fuse.js';
+import { computed } from 'vue';
 
 export function useFuseSearch<T>(
   items: Ref<T[]>,
-  keys: string[],
+  keys: Ref<string[]>,
   query: Ref<string>
 ) {
-  const results = ref<{ item: T }[]>([]);
-  const options: IFuseOptions<T> = {
-    keys,
-    threshold: 0.3,
-    includeScore: true,
-  };
+  let fuse: Fuse<T> | null = null;
 
-  let fuse = new Fuse(items.value, options);
+  const fuseVersion = ref(0); // dummy ref to force computed results to trigger
 
-  watch(
-    query,
-    (newQuery) => {
-      results.value = newQuery
-        ? fuse.search(newQuery).map((r) => ({ item: r.item }))
-        : items.value.map((item) => ({ item }));
-    },
-    { immediate: true }
-  );
+  function updateFuse() {
+    if (
+      !Array.isArray(items.value) ||
+      !Array.isArray(keys.value) ||
+      keys.value.length === 0
+    ) {
+      fuse = null;
+      fuseVersion.value++; // forces the trigger
+      return;
+    }
 
-  watch(
-    () => items.value,
-    (newItems) => {
-      fuse = new Fuse(newItems, options);
-      results.value = query.value
-        ? fuse.search(query.value).map((r) => ({ item: r.item }))
-        : newItems.map((item) => ({ item }));
-    },
-    { immediate: true, deep: true }
-  );
+    fuse = new Fuse(items.value, {
+      keys: keys.value,
+      threshold: 0.3,
+      includeScore: true,
+    });
+    fuseVersion.value++;
+  }
+
+  watch([items, keys], updateFuse, { immediate: true, deep: true });
+
+  const results = computed(() => {
+    fuseVersion.value; // watching for the trigger
+    if (!fuse) {
+      return [];
+    }
+    return query.value
+      ? fuse.search(query.value).map((r) => ({ item: r.item }))
+      : items.value.map((item) => ({ item }));
+  });
+
+  watch(results, () => {
+    console.log(results.value);
+  });
 
   return { results };
 }

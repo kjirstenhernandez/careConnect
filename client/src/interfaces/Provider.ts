@@ -1,4 +1,5 @@
 export interface Provider {
+  id: string;
   firstName: string;
   lastName: string;
   locations: {
@@ -9,5 +10,5 @@ export interface Provider {
   fax: string;
   credentials: string[];
   specialty: string;
-  imageURL: string;
+  imageUrl: string;
 }

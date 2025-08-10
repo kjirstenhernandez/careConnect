@@ -9,7 +9,7 @@
             v-if="imageUrl && imageUrl != ''"
             class="w-32 h-32 rounded-full mx-auto"
             :src="imageUrl"
-            alt="{{ firstname lastName }} profile picture"
+            alt="{{ firstname}} {{ lastName }} profile picture"
           />
           <div
             v-else
@@ -78,7 +78,18 @@ function goToProfile() {
   router.push({
     name: 'ProviderPage',
     params: { id: props.id },
-    state: { provider: { ...props } },
+    state: {
+      provider: {
+        id: props.id,
+        imageUrl: props.imageUrl,
+        firstName: props.firstName,
+        lastName: props.lastName,
+        specialty: props.specialty,
+        credentials: props.credentials,
+        phone: props.phone,
+        fax: props.fax,
+      },
+    },
   });
 }
 </script>

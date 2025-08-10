@@ -1,6 +1,6 @@
 <template>
-  <div class="relative py-12 flex flex-col items-center lg:py-20">
-    <div class="container flex flex-col items-center">
+  <div class="relative py-12 items-center lg:py-20">
+    <div class="container flex flex-col lg:flex-row items-center">
       <SearchTabs
         :type="type"
         @change="handleNavClick"

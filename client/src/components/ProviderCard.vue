@@ -61,7 +61,6 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import stethoscope from '../assets/stethoscope.png';
 
 const router = useRouter();
 const props = defineProps<{
@@ -76,6 +75,10 @@ const props = defineProps<{
 }>();
 
 function goToProfile() {
-  router.push({ name: 'ProviderPage', params: { id: props.id } });
+  router.push({
+    name: 'ProviderPage',
+    params: { id: props.id },
+    state: { provider: { ...props } },
+  });
 }
 </script>

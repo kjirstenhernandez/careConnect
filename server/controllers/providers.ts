@@ -71,9 +71,30 @@ export const addProvider = async (req: Request, res: Response) => {
 
 export const getProviderLocations = async (req: Request, res: Response) => {
   try {
-    const providerId = req.params.id
+    const providerId = req.params.id;
+    const provider = await findProviderById(providerId);
+    if (!provider) {
+      return res.status(404).json({ message: 'Provider Not Found' });
+    }
+
+    const locations = await prisma.providers.findUnique({
+      where: {
+        id: providerId,
+      },
+      select: {
+        locations: true,
+      },
+    });
+    return res.status(200).json({ locations });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({
+        message: 'Server error',
+        error: error instanceof Error ? error.message : String(error),
+      });
   }
-}
+};
 
 // Add new location to provider's locations list
 export const addProviderLocation = async (req: Request, res: Response) => {
@@ -102,7 +123,7 @@ export const addProviderLocation = async (req: Request, res: Response) => {
       provider: updatedProvider,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'Server error',
       error: error instanceof Error ? error.message : String(error),
     });

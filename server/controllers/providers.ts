@@ -69,6 +69,12 @@ export const addProvider = async (req: Request, res: Response) => {
   }
 };
 
+export const getProviderLocations = async (req: Request, res: Response) => {
+  try {
+    const providerId = req.params.id
+  }
+}
+
 // Add new location to provider's locations list
 export const addProviderLocation = async (req: Request, res: Response) => {
   try {

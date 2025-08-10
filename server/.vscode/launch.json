@@ -9,11 +9,11 @@
           "type": "node",
           "request": "launch",
           "name": "Debug TypeScript",
-          "program": "${workspaceFolder}/server/index.ts",
+          "program": "${workspaceFolder}/index.ts",
           "runtimeExecutable": "npx",
           "runtimeArgs": ["ts-node"],
           "args": [],
-          "cwd": "${workspaceFolder}/server",
+          "cwd": "${workspaceFolder}",
           "skipFiles": ["<node_internals>/**"]
         }
     ]

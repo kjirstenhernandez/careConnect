@@ -4,6 +4,7 @@ import {
   checkLocationExists,
   findProviderById,
 } from '../services/providerService';
+import { ObjectId } from 'mongodb';
 
 export const getProviderById = async (req: Request, res: Response) => {
   try {
@@ -87,12 +88,10 @@ export const getProviderLocations = async (req: Request, res: Response) => {
     });
     return res.status(200).json({ locations });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        message: 'Server error',
-        error: error instanceof Error ? error.message : String(error),
-      });
+    return res.status(500).json({
+      message: 'Server error',
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
 };
 
@@ -124,6 +123,31 @@ export const addProviderLocation = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(500).json({
+      message: 'Server error',
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+};
+
+export const getMultipleProvidersByIDs = async (
+  req: Request,
+  res: Response
+) => {
+  const { clinicId } = req.body;
+  try {
+    console.log('clinicId:', clinicId, typeof clinicId);
+    const providers = await prisma.providers.findMany({
+      where: {
+        locations: {
+          some: {
+            id: clinicId,
+          },
+        },
+      },
+    });
+    return res.status(200).json({ providers });
+  } catch (error) {
+    res.status(500).json({
       message: 'Server error',
       error: error instanceof Error ? error.message : String(error),
     });

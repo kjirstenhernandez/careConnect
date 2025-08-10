@@ -36,6 +36,6 @@ model Clinics {
 }
 
 type Location {
-  id   String @db.ObjectId
+  id   String
   city String
 }

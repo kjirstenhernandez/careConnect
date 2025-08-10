@@ -1,9 +1,10 @@
 import type { Provider, Clinic } from '@/interfaces';
+const serverHost = import.meta.env.VITE_API_URL;
 
 export const endpointsMap: Record<string, string> = {
-  clinics: 'http://localhost:2000/api/clinics/find',
-  providers: 'http://localhost:2000/api/providers/find',
-  specialties: 'http://localhost:2000/api/providers/find',
+  clinics: `${serverHost}/clinics/find`,
+  providers: `${serverHost}/providers/find`,
+  specialties: `${serverHost}/providers/find`,
 };
 
 export async function fetchSearchData(

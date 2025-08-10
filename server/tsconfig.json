@@ -11,5 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true 
-  }
+  },
+  "include": ["*.ts", "controllers/**/*.ts", "middleware/**/*.ts", "prisma/**/*.ts", "routes/**/*.ts", "services/**/*.ts", "utilities/**/*.ts"]
 }

@@ -6,8 +6,10 @@ export async function validateObjectId(
   res: Response,
   next: NextFunction
 ) {
-  const { providerId } = req.params;
-  if (!ObjectId.isValid(providerId)) {
+  const idParam = Object.keys(req.params).find((key) => key.endsWith('Id'));
+  const idValue = idParam ? req.params[idParam] : null;
+
+  if (!idValue || !ObjectId.isValid(idValue)) {
     return res.status(400).json({ message: 'Invalid ID' });
   } else {
     next();

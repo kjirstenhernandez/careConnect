@@ -73,3 +73,23 @@ export const addClinic = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getMultipleClinicsByIDs = async (req: Request, res: Response) => {
+  const { clinicIds } = req.body; // expects an array of IDs
+  if (!Array.isArray(clinicIds) || clinicIds.length === 0) {
+    return res
+      .status(400)
+      .json({ message: 'clinicIds must be a non-empty array.' });
+  }
+  try {
+    const clinics = await prisma.clinics.findMany({
+      where: { id: { in: clinicIds } },
+    });
+    return res.status(200).json({ clinics });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server error',
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+};

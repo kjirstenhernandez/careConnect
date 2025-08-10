@@ -7,10 +7,12 @@ export function useFilteredResults(
   fuseResults: Ref<{ item: Provider | Clinic }[]>
 ) {
   function isProvider(item: any): item is Provider {
+    console.log('is Provider');
     return 'locations' in item;
   }
 
   function isClinic(item: any): item is Clinic {
+    console.log('is Clinic');
     return 'city' in item && 'name' in item;
   }
 

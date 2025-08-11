@@ -1,4 +1,14 @@
+<!--
+  MiniCard Component
+
+  Displays a compact card for a healthcare provider, showing their photo, name, credentials, and a link to visit their profile page.
+  Used in the "providers" section of a clinic's page.
+-->
 <template>
+  <!--
+  Renders a styled card with provider image (or placeholder), name, credentials, and a clickable link to navigate to the provider's detail page.
+  Designed for use in lists or profile sections.
+-->
   <div
     class="cursor-pointer bg-gray-100 rounded-lg shadow p-4 flex flex-col items-center hover:bg-blue-50"
     @click="goToPage"
@@ -33,6 +43,12 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// Props:
+// - id: Provider ID (for navigation)
+// - firstName, lastName: Provider's name
+// - credentials: Array of credentials (e.g., MD, PA)
+// - imageUrl: Profile image URL (uses placeholder if missing)
 const props = defineProps<{
   id: string;
   firstName: string;

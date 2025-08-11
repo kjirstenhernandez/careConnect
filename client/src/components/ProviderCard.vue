@@ -1,3 +1,9 @@
+<!--
+  ProviderCard Component
+
+  Displays a detailed card for a healthcare provider, including photo, name, credentials, specialty, phone, fax, and a link to view more information.
+  Used to show provider details in lists or profile sections.
+-->
 <template>
   <div>
     <div
@@ -63,6 +69,15 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// Props:
+// - id: Provider ID (for navigation)
+// - imageUrl: Profile image URL (optional, uses placeholder if missing)
+// - firstName, lastName: Provider's name
+// - specialty: Provider's specialty
+// - credentials: Array of credentials (e.g., MD, PA)
+// - phone: Provider's phone number
+// - fax: Provider's fax number (optional)
 const props = defineProps<{
   id: string;
   imageUrl?: string;
@@ -74,6 +89,7 @@ const props = defineProps<{
   fax: string;
 }>();
 
+// Navigates to the ProviderPage route for the selected provider, passing provider details in route state
 function goToProfile() {
   router.push({
     name: 'ProviderPage',

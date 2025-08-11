@@ -1,3 +1,9 @@
+<!--
+  SearchTabs Component
+
+  Displays tab buttons for switching between search categories (Providers, Clinics, Specialties).
+  Updates the route to reflect the selected category.
+-->
 <template>
   <section>
     <nav class="mt-8 sm:px-6 md:overflow-x-hidden">
@@ -34,10 +40,18 @@
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-const props = defineProps<{ type: string }>();
+
+// Props:
+// - type: Current search category (e.g., "providers", "clinics", "specialties")
+const props = defineProps<{ 
+  type: string
+}>();
 const route = useRoute();
+
+// currentType: Computed value for the active tab, defaults to "providers"
 const currentType = computed(() => props.type || 'providers');
 
+// changeType: Navigates to the same route with the selected type as a parameter
 function changeType(newType: string) {
   router.push({
     name: route.name,

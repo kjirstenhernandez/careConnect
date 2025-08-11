@@ -1,3 +1,9 @@
+<!--
+  NavBar Component
+
+  Displays the main navigation bar for the app, including logo, app name, navigation links, and login button.
+  Responsive design adapts layout for desktop and mobile screens.
+-->
 <template>
   <header class="bg-white/90 shadow-md backdrop-blur-md">
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -22,7 +28,7 @@
             >CareConnect</span
           >
         </div>
-
+      <!-- hidden, later implementing with mobile hamburger-menu-->
         <div class="hidden md:block">
           <nav aria-label="Global">
             <ul class="flex items-center gap-15 text-md">
@@ -93,6 +99,10 @@
 </template>
 
 <script setup lang="ts">
+// Imports Vue reactivity and RouterLink for navigation
+// showMobileNav: Controls visibility of mobile navigation menu (not yet implemented)
+// toggleMobileNav: Toggles mobile navigation menu
+
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 

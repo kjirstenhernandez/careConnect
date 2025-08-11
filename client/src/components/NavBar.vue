@@ -13,7 +13,7 @@
           >
             <img
               class="max-w-16 md:w-12"
-              src="../assets/logo.png"
+              src="../assets/logo.webp"
               alt="Logo"
             />
           </a>

@@ -1,18 +1,16 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// Generator for Prisma Client JS
 generator client {
   provider = "prisma-client-js"
 }
 
+// Configuring the database
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+// Represents a healthcare Provider
 model Providers {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   firstName   String
@@ -25,6 +23,7 @@ model Providers {
   imageUrl    String?
 }
 
+// Represents a medical Clinic
 model Clinics {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   name          String @unique
@@ -35,6 +34,7 @@ model Clinics {
   fax           String
 }
 
+// Type created to represent a clinic in the embedded location field under providers
 type Location {
   id   String
   city String

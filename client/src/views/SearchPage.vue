@@ -1,4 +1,17 @@
+<!--
+  SearchPage View
+
+  Provides a unified interface for searching providers or clinics.
+  Includes tabs for switching search type, a search bar for queries and location, and displays filtered results.
+-->
+
+
 <template>
+  <!--
+  Renders search tabs, search bar, and search results.
+  Displays results using CardWrapper based on current search type and filters.
+  Responsive layout for desktop and mobile.
+-->
   <div class="relative py-12 items-center lg:py-20">
     <div class="container flex flex-col items-center">
       <SearchTabs
@@ -27,6 +40,14 @@
 </template>
 
 <script setup lang="ts">
+// Imports and setup for route, search logic, and data refs
+// - useFuseSearch: Fuzzy search composable for query matching
+// - useFilteredResults: Filters results by location and type
+// - fetchSearchData: Loads raw data from API based on search type
+// Watches and updates search type, query, and location
+// Handles navigation and search actions
+
+
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';

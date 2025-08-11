@@ -1,3 +1,13 @@
+<!--
+  LandingPage View
+
+  Displays the main entry point for the app, including the hero section and navigation buttons for searching providers, clinics, or specialties.
+-->
+
+<!--
+  Renders the hero section and three ActionCircle buttons for navigating to provider, clinic, or specialty search pages.
+  Responsive layout for desktop and mobile.
+-->
 <template>
   <div class="pt-30 flex flex-col items-center gap-5 md:pt-20">
     <Hero />
@@ -37,6 +47,12 @@
 </template>
 
 <script setup lang="ts">
+
+// Imports Hero and ActionCircle components, and sets up navigation functions.
+// goToProviders: Navigates to provider search page
+// goToClinics: Navigates to clinic search page
+// goToSpecialty: Navigates to specialty search page
+
 import { useRouter } from 'vue-router';
 import ActionCircle from '@/components/ActionCircle.vue';
 import Hero from '@/components/Hero.vue';

@@ -9,17 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', router);
+app.use('/api', router);  //Mounting the router for /api calls
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '../dist'))); //where to get static files
 
-// Catch-all to serve index.html for SPA routes
-app.get(/^\/(?!api).*/, (_, res) => {
-  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
-});
-
-// Choose your port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // declaring port use
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

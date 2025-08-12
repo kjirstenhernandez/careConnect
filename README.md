@@ -1,6 +1,6 @@
 # careConnect
 
-A web application for connecting patients with clinics and healthcare providers.
+A web application designed to connect healthcare professionals and patients across Utah Valley. It provides a centralized platform for users to search for individual providers, clinics, and specialties, view detailed contact and profile information, and easily navigate between healthcare resources. The app streamlines the process of finding and connecting with medical professionals, improving accessibility and communication within the local healthcare community.
 
 ---
 

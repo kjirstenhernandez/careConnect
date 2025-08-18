@@ -1,5 +1,5 @@
 <template>
-  <div class="relative py-12 items-center lg:py-20">
+  <div class="relative py-12 flex flex-col items-center lg:py-20">
     <div class="container flex flex-col items-center">
       <SearchTabs
         :type="type"
@@ -13,15 +13,25 @@
         @search="handleSearchClick"
       />
     </div>
-    <div class="search-results">
-      <h1 class="text 2xl font-bold mb-4">
-        {{ type === 'providers' ? 'Providers' : 'Clinics' }} Search Results
-      </h1>
-      <CardWrapper
-        :items="filteredResults"
-        :type="type"
-      />
-      <!-- the :type errors when specifying the providers/clinics in the prop -->
+    <div class="search-results flex flex-col items-center justify-center">
+      <div
+        v-if="loading"
+        class="my-8"
+      >
+        <span
+          class="animate-spin inline-block w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full"
+        ></span>
+        <p class="mt-2 text-blue-500 font-semibold">Searching...</p>
+      </div>
+      <div v-else>
+        <h1 class="text-2xl font-bold mb-4">
+          {{ type === 'providers' ? 'Providers' : 'Clinics' }} Search Results
+        </h1>
+        <CardWrapper
+          :items="filteredResults"
+          :type="type"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -46,6 +56,7 @@ type SearchItem = Provider | Clinic;
 const route = useRoute();
 const type = ref(route.params.type as string);
 // let isInitialLoad = true;
+const loading = ref(false);
 const keyword = ref('');
 const queryValue = ref('');
 const location = ref('');
@@ -66,6 +77,7 @@ const { results: fuseResults } = useFuseSearch(data, keys, keyword);
 const filteredResults = useFilteredResults(type, location, fuseResults);
 
 async function loadData() {
+  loading.value = true;
   const response = (await fetchSearchData(type.value)) as {
     clinicInfo?: Clinic[];
     providers?: Provider[];
@@ -76,6 +88,7 @@ async function loadData() {
   } else if (type.value === 'providers') {
     data.value = response.providers ?? [];
   }
+  loading.value = false;
 }
 watch(filteredResults, (newVal) => {
   console.log('filteredResults changed:', newVal);

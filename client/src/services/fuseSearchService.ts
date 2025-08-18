@@ -3,6 +3,18 @@ import Fuse from 'fuse.js';
 import type { IFuseOptions } from 'fuse.js';
 import { computed } from 'vue';
 
+/**
+ * useFuseSearch composable
+ * 
+ * Sets up Fuse.js fuzzy search for a reactive list of items.
+ * Automatically updates Fuse instance when items or keys change.
+ * Returns computed search results based on the current query.
+ *
+ * @param items - Ref to an array of items to search
+ * @param keys - Ref to an array of keys to search on (Fuse.js keys)
+ * @param query - Ref to the current search query string
+ * @returns { results } - Computed array of search results (each result has an 'item' property)
+ */
 export function useFuseSearch<T>(
   items: Ref<T[]>,
   keys: Ref<string[]>,
@@ -12,6 +24,7 @@ export function useFuseSearch<T>(
 
   const fuseVersion = ref(0); // dummy ref to force computed results to trigger
 
+  // Updates Fuse instance whenever items or keys change
   function updateFuse() {
     if (
       !Array.isArray(items.value) ||
@@ -30,9 +43,10 @@ export function useFuseSearch<T>(
     });
     fuseVersion.value++;
   }
-
+  // Watch for changes in items or keys and update Fuse instance
   watch([items, keys], updateFuse, { immediate: true, deep: true });
 
+  // Computed search results based on query and Fuse instance
   const results = computed(() => {
     fuseVersion.value; // watching for the trigger
     if (!fuse) {
@@ -43,6 +57,7 @@ export function useFuseSearch<T>(
       : items.value.map((item) => ({ item }));
   });
 
+  // (logger for debugging)
   watch(results, () => {
     console.log(results.value);
   });

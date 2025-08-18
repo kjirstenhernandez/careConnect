@@ -1,4 +1,17 @@
+<!--
+  ProviderPage View
+
+  Displays detailed information for a single healthcare provider, including profile image, contact info, credentials, and a list of associated clinic locations.
+  Loads provider and clinic data from the API based on the route parameter.
+-->
+
+
 <template>
+  <!--
+  Renders provider details and associated clinic cards.
+  Shows an error message if the provider is unavailable.
+  Responsive layout for desktop and mobile.
+-->
   <section class="w-full overflow-hidden">
     <div v-if="!provider">
       <h1 class="text-xl">Sorry</h1>
@@ -91,6 +104,12 @@
   </section>
 </template>
 <script setup lang="ts">
+// Imports and setup for route, API calls, and data refs
+// - loadPage: Fetches provider info from the API
+// - fetchClinics: Fetches clinics associated with the provider
+// Watches provider ref to reload clinics when provider changes
+// Loads data on mount
+
 console.log('Provider page mounted!');
 import { useRoute } from 'vue-router';
 import { ref, onMounted, watch } from 'vue';

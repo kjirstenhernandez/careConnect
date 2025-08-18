@@ -1,4 +1,7 @@
-<!-- Hero.vue -->
+<!--  Hero Component
+
+  Displays a visibly-appealing header section for the app, including a main title and subtitle.
+  Introduces the app and its purpose to users. -->
 <template>
   <div
     class="flex flex-col items-center justify-center mb-2 w-full h-[40vh] space-y-10 px-4 pb-5 sm:px-6 sm:-mb-1"

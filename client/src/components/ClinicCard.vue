@@ -1,4 +1,14 @@
+<!--
+  ClinicCard Component
+
+  Displays a styled card with clinic information including name, address, phone, and optional fax.
+  Includes a "More Info" link that navigates to the clinic's profile page.
+-->
 <template>
+  <!--
+  Renders clinic details in a card layout with image, name, address, phone, and fax.
+  The "More Info" link uses Vue Router to navigate to the clinic's profile.
+-->
   <div>
     <div
       class="clinic-card max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
@@ -53,6 +63,13 @@ import { useRouter } from 'vue-router';
 import stethoscope from '../assets/stethoscope.png';
 
 const router = useRouter();
+
+// Props:
+// - id: Clinic ID (used for navigation)
+// - name: Clinic name
+// - streetAddress, city, zip: Address details
+// - phone: Clinic phone number
+// - fax: Clinic fax number (optional)
 const props = defineProps<{
   id: string;
   name: string;
@@ -63,6 +80,7 @@ const props = defineProps<{
   fax: string;
 }>();
 
+// Navigates to the ClinicPage route for the selected clinic
 function goToProfile() {
   router.push({ name: 'ClinicPage', params: { id: props.id } });
 }

@@ -1,3 +1,9 @@
+<!--
+  LocationCard Component
+
+  Displays a compact card for a clinic location, showing the clinic name and a link to visit the clinic's profile page.
+  Used in the "locations" section of a provider's profile.
+-->
 <template>
   <div
     class="bg-gray-100 rounded-lg shadow p-4 flex flex-col items-center text-center"
@@ -16,6 +22,11 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// Props:
+// - id: Clinic ID (for navigation)
+// - name: Clinic name
+// - city, phone, fax: Additional clinic details (not displayed here)
 const props = defineProps<{
   id: string;
   name: string;
@@ -24,6 +35,7 @@ const props = defineProps<{
   fax: string;
 }>();
 
+// Navigates to the ClinicPage route for the selected clinic when clicked
 function goToPage() {
   console.log('goToPage fired!');
   router.push({

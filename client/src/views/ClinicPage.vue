@@ -1,4 +1,15 @@
+<!--
+  ClinicPage View
+
+  Displays detailed information for a single clinic, including address, contact info, and a list of associated providers.
+  Loads clinic and provider data from the API based on the route parameter.
+-->
+
 <template>
+  <!--
+  Renders clinic details and provider cards.
+  Shows an error message if the clinic is unavailable.
+-->
   <section class="w-full overflow-hidden">
     <div v-if="!clinic">
       <h1>Sorry</h1>
@@ -57,6 +68,10 @@
 </template>
 
 <script setup lang="ts">
+// Imports and setup for route, API calls, and data refs
+// - loadClinic: Fetches clinic info from the API
+// - fetchProviders: Fetches providers associated with the clinic
+
 import { useRoute } from 'vue-router';
 import { ref, onMounted, watch } from 'vue';
 
@@ -103,7 +118,8 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style> 
+/* Gradient mask for clinic cover image */
 .mask-gradient {
   -webkit-mask-image: linear-gradient(
     to bottom,

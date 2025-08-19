@@ -9,11 +9,11 @@
   Responsive layout for desktop and mobile.
 -->
 <template>
-  <div class="pt-30 flex flex-col items-center gap-5 md:pt-20">
+  <div class="pt-30 flex flex-col items-center md:pt-20">
     <Hero />
     <br></br>
     <div
-      class="flex flex-col mt-10 pb-10 gap-6 md:flex-row sm:mt-0"
+      class="flex flex-col pb-10 gap-6 md:flex-row sm:mt-0 md:-mt-10"
     >
       <ActionCircle
         label="Find a Provider"

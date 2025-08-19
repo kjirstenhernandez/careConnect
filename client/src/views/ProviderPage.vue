@@ -5,7 +5,6 @@
   Loads provider and clinic data from the API based on the route parameter.
 -->
 
-
 <template>
   <!--
   Renders provider details and associated clinic cards.
@@ -26,7 +25,7 @@
       />
       <div
         v-if="provider"
-        class="profile-container mt-30 p-20 sm:p-16 md:p-20 lg:p-24 xl:p-20 w-auto flex flex-col items-center lg:flex-row px-4 sm:px-8 md:px-24 lg:px-24 xl:px-24 relative mx-30 bg-white rounded-xl shadow-lg p-6 justify-around"
+        class="profile-container mt-30 p-10 min-w-fit sm:p-16 md:p-20 lg:p-24 xl:p-20 w-auto flex flex-col items-center lg:flex-row px-4 sm:px-8 md:px-24 lg:px-24 xl:px-24 relative mx-30 bg-white rounded-xl shadow-lg p-6 justify-evenly space-x-8"
       >
         <!-- User Profile Image -->
         <div
@@ -36,7 +35,7 @@
           <img
             v-if="provider && provider.imageUrl"
             :src="provider.imageUrl"
-            class="rounded-lg min-w-[100px] w-full h-auto md:w-auto md:h-auto"
+            class="rounded-lg min-w-[100px] max-w-lg h-auto md:h-auto"
           /><img
             v-else
             src="../assets/provider-placeholder.webp"
@@ -49,7 +48,9 @@
           class="w-1/2"
         >
           <!-- FullName -->
-          <h1 class="text-center text-gray-800 text-4xl font-bold mt-2 p-5">
+          <h1
+            class="text-center text-gray-800 text-lg md:text-4xl font-bold mt-2 p-5"
+          >
             {{ provider.firstName }} {{ provider.lastName }}
             <span v-if="provider.credentials.length"
               >, {{ provider.credentials.join(', ') }}</span
@@ -60,13 +61,17 @@
             <table class="text-lg my-3 mx-auto">
               <tbody>
                 <tr>
-                  <td class="px-2 py-2 text-gray-500 font-semibold">
+                  <td
+                    class="text-sm md:text-md px-2 py-2 text-gray-500 font-semibold"
+                  >
                     <i class="bi bi-telephone-fill"></i>
                   </td>
                   <td class="px-2 py-2">{{ provider.phone }}</td>
                 </tr>
                 <tr v-if="provider.fax">
-                  <td class="px-2 py-2 text-gray-500 font-semibold">
+                  <td
+                    class="text-sm md:text-md px-2 py-2 text-gray-500 font-semibold"
+                  >
                     <i class="bi bi-printer-fill"></i>
                   </td>
                   <td class="px-2 py-2">{{ provider.fax }}</td>

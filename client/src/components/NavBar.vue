@@ -28,7 +28,7 @@
             >CareConnect</span
           >
         </div>
-      <!-- hidden, later implementing with mobile hamburger-menu-->
+        <!-- hidden, later implementing with mobile hamburger-menu-->
         <div class="hidden md:block">
           <nav aria-label="Global">
             <ul class="flex items-center gap-15 text-md">
@@ -62,6 +62,14 @@
         </div>
 
         <div class="flex flex-col items-center gap-4 md:flex-row">
+          <buttonTemplate
+            type="button"
+            textColorHex="text-[#02213B]"
+            backgroundColor="bg-[#4BA7D3]"
+            backgroundHover="hover:bg-[#7DBDDE]"
+            @click="handleLogin"
+            >Login</buttonTemplate
+          >
           <div class="sm:flex sm:gap-4">
             <a
               class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
@@ -104,12 +112,26 @@
 // toggleMobileNav: Toggles mobile navigation menu
 
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import router from '@/router';
 import { RouterLink } from 'vue-router';
+import buttonTemplate from './basic/buttonTemplate.vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
+const { loginWithRedirect } = useAuth0();
+const route = useRoute();
 const showMobileNav = ref(false);
 
 function toggleMobileNav() {
   showMobileNav.value = !showMobileNav.value;
+}
+
+function handleLogin() {
+  loginWithRedirect({
+    appState: {
+      target: '/dashboard',
+    },
+  });
 }
 </script>
 <!-- 

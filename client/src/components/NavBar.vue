@@ -70,18 +70,11 @@
             @click="handleLogin"
             >Login</buttonTemplate
           >
-          <div class="sm:flex sm:gap-4">
-            <a
-              class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-              href="#"
-            >
-              Login
-            </a>
-          </div>
 
           <div class="block md:hidden">
             <button
               class="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+              @click="toggleMobileNav"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -134,14 +127,3 @@ function handleLogin() {
   });
 }
 </script>
-<!-- 
-<script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
-
-const showMobileNav = ref(false);
-
-function toggleMobileNav() {
-  showMobileNav.value = !showMobileNav.value;
-}
-</script> -->

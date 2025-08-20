@@ -5,12 +5,12 @@ import LandingPage from '../views/LandingPage.vue';
 import SearchPage from '../views/SearchPage.vue';
 import ProviderPage from '@/views/ProviderPage.vue';
 import ClinicPage from '@/views/ClinicPage.vue';
+import DashboardPage from '@/views/DashboardPage.vue';
 
 // Create router instance with history mode and route definitions.
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    
     // Home/Landing page route
     {
       path: '/',
@@ -40,6 +40,13 @@ const router = createRouter({
       name: 'ClinicPage',
       component: ClinicPage,
       props: true,
+    },
+
+    // Dashboard Page for admin to create, edit, and delete collection entries
+    {
+      path: '/dashboard',
+      name: 'DashboardPage',
+      component: DashboardPage,
     },
   ],
 });

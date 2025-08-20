@@ -6,22 +6,14 @@ module.exports = {
   './src/**/*.{js,ts,jsx,tsx,vue}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-}
-
-
-export default {
-  theme: {
     extend: {
       fontFamily: {
         sans: ['Karla', 'sans-serif'],
-      },
-    },
+      }
+    }
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 }

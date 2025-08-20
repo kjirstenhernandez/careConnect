@@ -2,11 +2,23 @@
 @import "tailwindcss";
 
 body {
-    @apply bg-[#C3D3E3];
+    @apply bg-[#DEEFF7];
     @apply font-sans;
 
 }
+/* :root{
+    --primary-main: #03345D;
+    --primary-dark: #02213B;
+    --primary-light: #044E8B;
 
+    --secondary-main: #48A3D0;
+    --secondary-light: #6DB5D9;
+    
+    --tertiary-main: #1F6A9E;
+    --tertiary-dark: #1B5B88;
+    --accent-light: #DEEFF7;
+    --accent-bright: #9FD356;
+} */
 html,
 body,
 #app {
